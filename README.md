@@ -22,11 +22,6 @@ More than just an AI chatbot, Nomisma helps turn research ideas into practical w
 | **Finance** | Financial analysis, quantitative modeling, and backtesting |
 | **Big Data** | General-purpose data processing and exploration |
 
-## Our Philosophy
-
-We believe AI should do more than generate answers. It should help people collect data, build models, execute analysis, and produce meaningful results.
-
-Nomisma aims to make practical research and analytical tools more accessible to everyone.
 
 ## Open Source
 
@@ -42,7 +37,7 @@ We sincerely appreciate the original project and its contributors.
 
 ## Others
 
-The Nomisma is a vibe-coding creation and still has plenty of issues or the imprefect using experience
+The Nomisma is a vibe-coding creation and still has plenty of issues or the imprefect using experiences
 
 Any issues are welcomed to re1kowww@163.com
 ---
@@ -78,7 +73,7 @@ Nomisma 不只是一个 AI 聊天工具。它能够协助用户从数据获取�
 
 ## 致谢
 
-Nomisma是基于 *Harnns* 的底座，并且特化了我们的功能与workflow
+Nomisma是基于 *Harnss* 的底座，并且特化了我们的功能与workflow
 
 我们真心感谢Harnss原项目及其贡献者
 
