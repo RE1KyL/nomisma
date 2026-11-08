@@ -40,6 +40,7 @@ We sincerely appreciate the original project and its contributors.
 The Nomisma is a vibe-coding creation and still has plenty of issues or the imprefect using experiences
 
 Any issues are welcomed to re1kowww@163.com
+
 ---
 
 # Nomisma
@@ -78,8 +79,9 @@ Nomisma是基于 *Harnss* 的底座，并且特化了我们的功能与workflow
 我们真心感谢Harnss原项目及其贡献者
 
 ## 其他
-
+ 
 因为Nomisma本质Vibe coding 产物，仍然会有许多不足的地方与不完美的使用体验，欢迎联络re1kowww@163.com汇报你的issues
+
 ---
 
 **Built for exploration, shared for everyone.**
