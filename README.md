@@ -34,6 +34,17 @@ Released under the [MIT License](LICENSE).
 
 Contributions, suggestions, and feedback are welcome.
 
+## Acknowledgements
+
+Nomisma is built upon and adapted from *Harnss* with its own architecture, specialized features, and research workflows.
+
+We sincerely appreciate the original project and its contributors.
+
+## Others
+
+The Nomisma is a vibe-coding creation and still has plenty of issues or the imprefect using experience
+
+Any issues are welcomed to re1kowww@163.com
 ---
 
 # Nomisma
@@ -60,24 +71,20 @@ Nomisma 不只是一个 AI 聊天工具。它能够协助用户从数据获取�
 | **Finance** | 金融分析、量化建模与策略回测 |
 | **Big Data** | 通用数据处理与探索 |
 
-## 项目理念
-
-我们相信，AI 不应该只负责生成答案，还应该帮助人们获取数据、构建模型、执行分析，并最终产出有意义的研究成果。
-
-Nomisma 希望让更多人能够方便地使用专业的数据研究与分析工具。
 
 ## 开源协议
 
 本项目基于 [MIT License](LICENSE) 开源，欢迎社区参与和贡献。
 
-## Acknowledgements
+## 致谢
 
-Nomisma is built upon and adapted from Harness, with its own architecture, specialized features, and research workflows.
+Nomisma是基于 *Harnns* 的底座，并且特化了我们的功能与workflow
 
-Nomisma 基于 Harness 修改与扩展，在此基础上构建了独立的产品架构、专业功能与研究工作流。
+我们真心感谢Harnss原项目及其贡献者
 
-We sincerely appreciate the original project and its contributors.
+## 其他
 
+因为Nomisma本质Vibe coding 产物，仍然会有许多不足的地方与不完美的使用体验，欢迎联络re1kowww@163.com汇报你的issues
 ---
 
 **Built for exploration, shared for everyone.**
