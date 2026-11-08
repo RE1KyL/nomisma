@@ -1,0 +1,137 @@
+import { useState, useCallback, type KeyboardEvent } from "react";
+import {
+  Check,
+  Loader2,
+  Sparkles,
+} from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import type { EngineId } from "@/types";
+
+export interface CommitInputProps {
+  cwd: string;
+  stagedCount: number;
+  totalChanges: number;
+  activeEngine?: EngineId;
+  activeSessionId?: string | null;
+  onSyncError: (error: string) => void;
+  onCommit: (message: string) => Promise<void>;
+}
+
+export function CommitInput({
+  cwd,
+  stagedCount,
+  totalChanges,
+  activeEngine,
+  activeSessionId,
+  onSyncError,
+  onCommit,
+}: CommitInputProps) {
+  const [commitMessage, setCommitMessage] = useState("");
+  const [generatingMessage, setGeneratingMessage] = useState(false);
+
+  const handleCommit = useCallback(async () => {
+    if (!commitMessage.trim() || stagedCount === 0) return;
+    await onCommit(commitMessage.trim());
+    setCommitMessage("");
+  }, [commitMessage, stagedCount, onCommit]);
+
+  const handleCommitKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+        e.preventDefault();
+        handleCommit();
+      }
+    },
+    [handleCommit],
+  );
+
+  const handleGenerateMessage = useCallback(async () => {
+    setGeneratingMessage(true);
+    try {
+      const result = await window.claude.git.generateCommitMessage(
+        cwd,
+        activeEngine,
+        activeEngine !== "claude" && activeSessionId ? activeSessionId : undefined,
+      );
+      if (result.message) {
+        setCommitMessage(result.message);
+      } else if (result.error) {
+        onSyncError(result.error);
+      } else {
+        onSyncError("No result received");
+      }
+    } finally {
+      setGeneratingMessage(false);
+    }
+  }, [cwd, activeEngine, activeSessionId, onSyncError]);
+
+  const canCommit = commitMessage.trim().length > 0 && stagedCount > 0;
+
+  return (
+    <div className="mx-3 mb-1">
+      <div className="overflow-hidden rounded-md border border-foreground/[0.08] bg-foreground/[0.02] transition-colors focus-within:border-foreground/[0.15] focus-within:bg-foreground/[0.04]">
+        <textarea
+          value={commitMessage}
+          onChange={(e) => setCommitMessage(e.target.value)}
+          onKeyDown={handleCommitKeyDown}
+          placeholder="Commit message…"
+          rows={2}
+          className="w-full resize-none bg-transparent px-2.5 pt-1.5 pb-1 text-[11px] leading-relaxed text-foreground/80 outline-none placeholder:text-foreground/30"
+        />
+        {/* Action bar */}
+        <div className="flex items-center gap-1 border-t border-foreground/[0.06] px-1 py-0.5">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                onClick={handleGenerateMessage}
+                disabled={generatingMessage || totalChanges === 0}
+                className="flex h-5.5 items-center gap-1 rounded-md px-1.5 text-[10px] font-medium text-foreground/40 transition-colors hover:bg-foreground/[0.06] hover:text-foreground/70 disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer"
+              >
+                {generatingMessage ? (
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                ) : (
+                  <Sparkles className="h-3 w-3" />
+                )}
+                <span>Generate</span>
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={4}>
+              <p className="text-xs">AI commit message</p>
+              <p className="text-[10px] text-background/60">Respects CLAUDE.md rules</p>
+            </TooltipContent>
+          </Tooltip>
+          <div className="min-w-0 flex-1" />
+          {stagedCount > 0 && (
+            <span className="text-[10px] tabular-nums text-foreground/40">
+              {stagedCount} staged
+            </span>
+          )}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                onClick={handleCommit}
+                disabled={!canCommit}
+                className={`flex h-5.5 items-center gap-1 rounded-md px-2 text-[10px] font-medium transition-colors cursor-pointer ${
+                  canCommit
+                    ? "bg-foreground/[0.1] text-foreground/70 hover:bg-foreground/[0.15] hover:text-foreground/90"
+                    : "text-foreground/25 cursor-not-allowed"
+                }`}
+              >
+                <Check className="h-3 w-3" />
+                <span>Commit</span>
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" sideOffset={4}>
+              <p className="text-xs">
+                Commit changes
+                <span className="ms-1.5 text-background/50">⌘↵</span>
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </div>
+    </div>
+  );
+}

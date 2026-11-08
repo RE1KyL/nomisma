@@ -1,0 +1,42 @@
+.nomisma-shell{display:flex;height:100vh;background:#F5F8FD;color:#172B45;font:14px 'Microsoft YaHei UI',system-ui,sans-serif;color-scheme:light;--background:#fff;--foreground:#172B45;--sidebar:#EAF3FF;--primary:#174F94;--muted:#EAF3FF;--border:#D7E1EE;--muted-foreground:#52657C}
+.nomisma-shell button{cursor:pointer}.nomisma-shell button:focus-visible{outline:2px solid #347BD2;outline-offset:2px}.n-nav{width:150px;flex-shrink:0;padding:22px 10px;background:#fff;border-right:1px solid #D7E1EE;display:flex;flex-direction:column;gap:12px}.n-nav.collapsed{width:64px}.n-symbol{width:44px;height:44px;object-fit:contain}.n-nav strong{font-size:18px;color:#174F94}.n-nav small{display:block;font-size:9px;letter-spacing:1px}.n-nav button{display:flex;align-items:center;gap:12px;min-height:44px;padding:10px;border-radius:9px}.nomisma-shell .selected{background:#DCEBFF;color:#174F94}.n-credit{margin-top:auto;color:#52657C}.n-main{flex:1;min-width:0;display:flex;flex-direction:column}.n-header{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;color:#52657C;background:#fff;border-bottom:1px solid #D7E1EE}.n-header span:first-child{letter-spacing:2px;color:#174F94;font-weight:600}.n-tabs{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid #D7E1EE}.n-tabs button,.n-filebar button,.n-sheet-tabs button{padding:7px 14px;border-radius:6px;background:#fff}.n-agent{flex:1;min-height:0;position:relative}.n-agent[hidden]{display:none}.n-agent>div{height:100%!important}.nomisma-shell[data-section=chat] .nomisma-session-sidebar,.nomisma-shell[data-section=settings] .nomisma-session-sidebar{display:none}.n-explorer{width:260px;background:#fff;border-left:1px solid #D7E1EE;padding:14px;overflow:auto}.n-explorer header{display:flex;justify-content:space-between;font-weight:600;margin-bottom:22px}.n-explorer details{padding:4px 0 4px 12px}.n-explorer summary{cursor:pointer;padding:6px}.n-explorer button{display:block;padding:7px 8px;width:100%;text-align:left;border-radius:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.n-explorer header button{width:auto}.n-document{flex:1;min-height:0;display:flex;flex-direction:column;background:#fff}.n-filebar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid #D7E1EE}.n-note{font-size:12px;color:#52657C;padding:8px 20px}.n-sheet-tabs{padding:8px;display:flex;gap:8px}.n-document .rdg{flex:1;min-height:200px;color-scheme:light;--rdg-background-color:white;--rdg-header-background-color:#EAF3FF}.n-text,.n-preview{padding:24px;overflow:auto;flex:1;line-height:1.7}.n-preview td{padding:6px 14px;border:1px solid #D7E1EE;white-space:nowrap}.n-error{padding:10px 20px;background:#fff0ef;color:#9b2424}.n-agent .nomisma-session-sidebar{max-width:270px}.n-agent h1{color:#174F94}@media(max-width:1000px){.n-explorer{width:220px}.n-nav{width:64px}.n-nav strong,.n-nav .n-credit{display:none}}
+
+/* Nomisma light surfaces must not inherit white sidebar text from Harnss dark mode. */
+.nomisma-shell{
+  --sidebar-foreground:#111827;--sidebar-accent-foreground:#111827;
+  --sidebar-primary:#174F94;--sidebar-primary-foreground:#fff;
+  --card:#fff;--card-foreground:#172B45;--accent:#DCEBFF;--accent-foreground:#111827;
+  --secondary:#EAF3FF;--secondary-foreground:#172B45;
+}
+.nomisma-shell .n-nav button,.nomisma-shell .n-explorer button{color:#111827;font-weight:600}
+.nomisma-session-sidebar{color:#111827;--sidebar-foreground:#111827;--sidebar-accent-foreground:#111827}
+.nomisma-session-sidebar [class*="text-sidebar-foreground"]{color:#172033}
+.nomisma-session-sidebar button{font-weight:600}
+.n-nav button{position:relative;transition:background-color 180ms ease,box-shadow 180ms ease,transform 150ms ease}
+.n-nav button:hover{background:#EAF3FF;box-shadow:inset 0 0 0 1px #A9CCF5}
+.n-nav button:active{transform:scale(.97);background:#DCEBFF}
+.n-nav button[aria-current=page]{font-weight:700;box-shadow:inset 3px 0 #347BD2}
+.n-nav button svg{flex-shrink:0;transition:color 180ms ease}
+.n-nav button:hover svg{color:#347BD2}
+.n-nav{overflow:hidden;min-width:0}
+.n-nav strong{overflow-wrap:anywhere}.n-nav small{letter-spacing:.4px}
+.n-explorer{flex-shrink:0;min-width:0}.n-explorer button:hover{background:#EAF3FF}
+.n-explorer summary{color:#111827;font-weight:600}
+.n-divider{flex:0 0 7px;position:relative;cursor:col-resize;touch-action:none;user-select:none;background:#F5F8FD;outline:none;z-index:2}
+.n-divider::after{content:'';position:absolute;inset:0 2px;background:transparent;border-radius:4px;transition:background-color 150ms ease}
+.n-divider:hover::after,.n-divider:focus-visible::after,.n-divider.dragging::after{background:#347BD2}
+.n-divider:focus-visible{outline:2px solid #347BD2;outline-offset:-2px}
+.n-divider.dragging{background:#DCEBFF}
+.n-file-test,.n-agent-unavailable{padding:10px 18px;color:#174F94;background:#EAF3FF;border-bottom:1px solid #A9CCF5;font-size:13px;line-height:1.6}
+.n-empty-state{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;isolation:isolate;text-align:center;pointer-events:none}
+.n-empty-logo{width:290px;height:180px;object-fit:contain;opacity:.17;filter:blur(.35px);margin-bottom:10px}
+.n-empty-state h2{font-size:24px;letter-spacing:5px;font-weight:600;color:#174F94}
+.n-empty-state p{font-size:17px;letter-spacing:1px;color:#52657C;margin-top:12px}
+.n-document .rdg{--rdg-color:#111827;--rdg-header-background-color:#EAF3FF;--rdg-background-color:#fff;--rdg-row-hover-background-color:#F5F8FD;--rdg-border-color:#D7E1EE;color:#111827}
+.n-document .rdg input{color:#111827;background:#fff}
+@media(max-width:1000px){.n-nav strong,.n-nav .n-credit{display:block}}
+@media(prefers-reduced-motion:reduce){.n-nav button,.n-nav button svg,.n-divider::after{transition:none}.n-nav button:active{transform:none}}
+.nomisma-shell .nomisma-session-sidebar button.session-item-active{color:#111827;font-weight:700}
+.nomisma-shell .nomisma-session-sidebar div.sidebar-search-glass{--sidebar-foreground:#111827}
+.nomisma-shell .nomisma-session-sidebar .sidebar-search-glass input::placeholder{color:#52657C;opacity:1}
+.nomisma-shell .n-tool-content pre{color:#334155}

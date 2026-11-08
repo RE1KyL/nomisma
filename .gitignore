@@ -218,3 +218,39 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Nomisma source directories are not Python distribution output.
+!Nomisma-Desktop/src/
+!Nomisma-Desktop/src/**
+!Nomisma-Desktop/electron/src/
+!Nomisma-Desktop/electron/src/**
+!Nomisma-Desktop/shared/
+!Nomisma-Desktop/shared/**
+!Nomisma-Desktop/build/
+!Nomisma-Desktop/build/**
+
+# Nomisma local state and generated artifacts
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+**/.test-tmp/
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pfx
+**/*.p12
+**/*.key
+**/logs/
+**/*.log
+**/dist/
+**/release/
+Nomisma/workspace/
+Nomisma/.dsh/*
+!Nomisma/.dsh/skills/
+Nomisma-Desktop/nomisma-agent.example.json
+release-source/
+**/*.pem
+**/*.exe
+**/*.dll
+**/*.node
+**/*.pyd

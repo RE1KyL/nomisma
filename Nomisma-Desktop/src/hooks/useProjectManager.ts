@@ -1,0 +1,90 @@
+import { useState, useCallback, useEffect } from "react";
+import type { Project } from "../types";
+
+export function useProjectManager() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading,setLoading]=useState(true);
+  const [error,setError]=useState('');
+
+  const refresh=useCallback(async()=>{setLoading(true);try{const list=await window.claude.projects.list();setProjects(list);setError('');return list;}catch(failure){setError(String(failure));throw failure;}finally{setLoading(false);}},[]);
+  useEffect(() => {void refresh().catch(()=>{});}, [refresh]);
+
+  const createProject = useCallback(async (spaceId?: string) => {
+    const project = await window.claude.projects.create(spaceId);
+    if (!project) return null;
+    setProjects((prev) => {
+      if (prev.some((p) => p.id === project.id)) return prev;
+      return [...prev, project];
+    });
+    return project;
+  }, []);
+
+  const createDevProject = useCallback(async (name: string, spaceId?: string) => {
+    const project = await window.claude.projects.createDev(name, spaceId);
+    if (!project) return null;
+    setProjects((prev) => {
+      if (prev.some((p) => p.id === project.id)) return prev;
+      return [...prev, project];
+    });
+    return project;
+  }, []);
+
+  const deleteProject = useCallback(async (id: string) => {
+    await window.claude.projects.delete(id);
+    setProjects((prev) => prev.filter((p) => p.id !== id));
+  }, []);
+
+  const renameProject = useCallback(async (id: string, name: string) => {
+    await window.claude.projects.rename(id, name);
+    setProjects((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, name } : p)),
+    );
+  }, []);
+
+  const updateProjectSpace = useCallback(async (id: string, spaceId: string) => {
+    await window.claude.projects.updateSpace(id, spaceId);
+    setProjects((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, spaceId } : p)),
+    );
+  }, []);
+
+  const updateProjectIcon = useCallback(async (id: string, icon: string | null, iconType: "emoji" | "lucide" | null) => {
+    await window.claude.projects.updateIcon(id, icon, iconType);
+    setProjects((prev) =>
+      prev.map((p) => {
+        if (p.id !== id) return p;
+        if (icon === null || iconType === null) {
+          const { icon: _i, iconType: _t, ...rest } = p;
+          return rest;
+        }
+        return { ...p, icon, iconType };
+      }),
+    );
+  }, []);
+
+  const reorderProject = useCallback(async (projectId: string, targetProjectId: string) => {
+    await window.claude.projects.reorder(projectId, targetProjectId);
+    setProjects((prev) => {
+      const next = [...prev];
+      const fromIdx = next.findIndex((p) => p.id === projectId);
+      const toIdx = next.findIndex((p) => p.id === targetProjectId);
+      if (fromIdx === -1 || toIdx === -1) return prev;
+      const [moved] = next.splice(fromIdx, 1);
+      next.splice(toIdx, 0, moved);
+      return next;
+    });
+  }, []);
+
+  return {
+    refresh,
+    loading,error,
+    projects,
+    createProject,
+    createDevProject,
+    deleteProject,
+    renameProject,
+    updateProjectSpace,
+    updateProjectIcon,
+    reorderProject,
+  };
+}

@@ -1,0 +1,1 @@
+{"name":"nomisma-dsh-runtime-candidate","private":true,"version":"1.0.0","dependencies":{"@deepseek-ai/dsh":"0.2.1-rc.2"},"overrides":{"undici@8.11.2":"8.12.2","zod@4.4.3":"4.6.6","fflate@0.8.2":"0.8.3","@modelcontextprotocol/client@2.2.0":"2.3.0"}}

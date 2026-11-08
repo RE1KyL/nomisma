@@ -1,0 +1,20 @@
+import type {ProjectContext} from './workspace';
+export type Domain='shared'|'economic'|'finance'|'big_data_explore';
+export interface DatasetRef {dataset_id:string;sha256:string}
+export interface ToolDescriptor {tool_id:string;domain:Domain;name:string;description:string;use_cases:string[];input_schema:Record<string,unknown>;output_schema:Record<string,unknown>;prerequisites:string[];dependencies:string[];permission:unknown;version:string;available:boolean;unavailable_reason?:string}
+export type TaskStatus='CREATED'|'PLANNED'|'WAITING_APPROVAL'|'QUEUED'|'RUNNING'|'SUCCEEDED'|'FAILED'|'CANCELLED'|'REJECTED'|'BLOCKED'|'RECOVERY_REQUIRED';
+export interface ApprovalRequest {permission_id:string;tool_call_id:string;arguments:Record<string,unknown>;arguments_sha256:string;status:string;at:string;started_at?:number}
+export interface ExecutionResult {ok:boolean;summary:string;data:Record<string,unknown>;artifacts:Array<{path:string;sha256:string}>;warnings:unknown[];error:{code:string;category:string;retryable:boolean}|null}
+export interface TaskSpec {task_id:string;research_id:string;project_context:ProjectContext;dependencies:string[];status:TaskStatus;tool_id:string;parameters:Record<string,unknown>;approval_requests:ApprovalRequest[];execution_result?:ExecutionResult;error_code?:string}
+export interface ArtifactRef {artifact_id:string;project_id:string;domain:Domain;experiment_id:string|null;task_id:string|null;artifact_type:string;file_path:string;file_hash:string;created_at:string;metadata:Record<string,unknown>;viewer:string}
+export interface ExperimentRecord {experiment_id:string;project_id:string;research_goal:string;domain:Domain;dataset_version:DatasetRef[];method:string[];parameters:Record<string,unknown>;tool_version:Record<string,string>;code_version:Record<string,string>;runtime_environment:Record<string,unknown>;random_seed:unknown;task_references:unknown[];artifacts:ArtifactRef[];execution_status:string;created_at:string}
+export interface AxisConfig {title:string;unit:string;min:number|null;max:number|null;scale:'linear'|'log';format:'number'|'percent'|'currency'|'date';precision:number;ticks:number}
+export interface ChartSeries {column:string;label:string;visible:boolean;color:string;width:number;marker:number}
+export type ChartType='line'|'bar'|'scatter'|'histogram'|'box'|'heatmap'|'coefficient';
+export interface ChartConfig {chart_type:ChartType;title:string;subtitle:string;x_column:string;x_axis:AxisConfig;y_axis:AxisConfig;legend:'top'|'bottom'|'right'|'none';grid:boolean;width:number;height:number;font_size:number;bins:number;series:ChartSeries[]}
+export interface ChartData {columns:string[];rows:Record<string,string|number|boolean|null>[];numeric_columns:string[];semantic:string;warnings:string[]}
+export interface OpenChart {chart:{chart_id:string;project_id:string;experiment_id:string|null;source_task_id:string|null;source_artifact_id:string;source_hash:string;chart_type:ChartType;chart_config:ChartConfig;created_at:string;version:number};source:ArtifactRef;data:ChartData;versions:{version:number;created_at:string}[];default_config:ChartConfig;allowed_types:ChartType[]}
+export interface InspectorCell {address:string;row:number;column:number;value:string|number|boolean|null;display:string;kind:string;number_format:string;formula:string|null;cached_value:unknown;flags:string[]}
+export interface SheetPage {path:string;version:string;sheets:{name:string;rows:number;columns:number}[];sheet:string;start_row:number;start_column:number;total_view_rows:number;rows:{source_row:number;cells:InspectorCell[];first_cell?:InspectorCell|null}[];first_row:InspectorCell[];first_column_header?:InspectorCell|null;quality_reports:{path:string;sha256:string}[];quality_scope:string;read_only:true;warnings:string[]}
+export interface InfrastructureAPI {request(projectId:string,action:string,payload?:Record<string,unknown>,sessionId?:string):Promise<unknown>}
+declare global {interface Window {infrastructure:InfrastructureAPI}}

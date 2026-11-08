@@ -1,0 +1,639 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@xterm/xterm/css/xterm.css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --space-hue: 0;
+  --space-chroma: 0;
+  --radius: 0.625rem;
+  --island-gap: 0.375rem;
+  --island-panel-gap: 0.25rem;
+  --island-radius: 0.75rem;
+  --island-control-radius: 0.6875rem;
+  --tool-picker-strip-width: 3.375rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0.006 285.885);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.965 0.001 286.029);
+  --secondary-foreground: oklch(0.205 0.006 285.885);
+  --muted: oklch(0.965 0.001 286.029);
+  --muted-foreground: oklch(0.556 0.009 286.029);
+  --accent: oklch(0.965 0.001 286.029);
+  --accent-foreground: oklch(0.205 0.006 285.885);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0.004 286.029);
+  --layout-divider: color-mix(in oklch, var(--border) 70%, var(--foreground) 30%);
+  --input: oklch(0.922 0.004 286.029);
+  --ring: oklch(0.705 0.015 286.029);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0.006 285.885);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.965 0.001 286.029);
+  --sidebar-accent-foreground: oklch(0.205 0.006 285.885);
+  --sidebar-border: oklch(0.922 0.004 286.029);
+  --sidebar-ring: oklch(0.705 0.015 286.029);
+  --line-number-color: rgba(0, 0, 0, 0.38);
+}
+
+.dark {
+  --background: oklch(0.107 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.257 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.257 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.107 0 0);
+  --secondary: oklch(0.337 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.337 0 0);
+  --muted-foreground: oklch(0.82 0 0);
+  --accent: oklch(0.337 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.399 0 0);
+  --layout-divider: var(--border);
+  --input: oklch(0.399 0 0);
+  --ring: oklch(0.641 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.195 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.316 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.38 0 0);
+  --sidebar-ring: oklch(0.641 0 0);
+  --line-number-color: rgba(255, 255, 255, 0.3);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Liquid Glass: transparent sidebar when native glass is active */
+html.glass-enabled,
+html.glass-enabled body,
+html.glass-enabled #root {
+  background: transparent !important;
+}
+
+.dark.glass-enabled {
+  --sidebar: oklch(0.107 0 0 / 0.34);
+  --sidebar-border: oklch(0.36 0 0 / 0.32);
+  --sidebar-accent: oklch(0.26 0 0 / 0.46);
+}
+
+.glass-enabled:not(.dark) {
+  /* Slightly reduce the white veil so the native glass comes through more. */
+  --sidebar: oklch(1 0 0 / 0.29);
+  --sidebar-border: oklch(0 0 0 / 0.08);
+  --sidebar-accent: oklch(0.965 0.001 286.029 / 0.3);
+  /* White text on glass sidebar — native glass shows through dark, so sidebar
+     text should be light (like dark mode) regardless of the app theme.
+     Exception: search input keeps dark text (see below). */
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-ring: oklch(0.64 0 0);
+  /* Keep --sidebar-accent-foreground at light-mode default for other accent
+     surfaces; selected chats are overridden below. */
+}
+
+/* Elements on light backgrounds (search box) — reset to dark text/icons */
+.glass-enabled:not(.dark) .glass-outline,
+.glass-enabled:not(.dark) .bg-sidebar-accent {
+  --sidebar-foreground: oklch(0.145 0 0);
+}
+
+/* Sidebar search stays on the white-text treatment in light glass mode. */
+.glass-enabled:not(.dark) .sidebar-search-glass {
+  --sidebar-foreground: oklch(0.985 0 0);
+}
+
+/* In light mode with glass enabled, selected chats should stay white. */
+.glass-enabled:not(.dark) .session-item-active {
+  color: oklch(0.985 0 0);
+}
+
+/* In light glass mode, sidebar engine icons match white text via inversion */
+.glass-enabled:not(.dark) .session-item-button img {
+  filter: invert(1) brightness(2);
+}
+
+/* In glass mode, only the outermost bg-sidebar (AppLayout root) provides
+   the glass brightening overlay. Nested bg-sidebar elements stay transparent
+   to avoid double-stacking the semi-transparent color. */
+.glass-enabled .bg-sidebar .bg-sidebar {
+  background-color: transparent;
+}
+
+/* ── Island glass border — diagonal reflection ── */
+/* Double-background trick: padding-box fills interior with bg color,
+   border-box gradient shows through the 1px transparent border as a
+   liquid-glass reflection — shines all around, strongest top-left
+   and bottom-right.
+   Override --island-fill on an element to darken/tint the interior. */
+.island {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: var(--island-radius);
+  background:
+    linear-gradient(var(--island-fill, var(--background)) 0 0) padding-box,
+    linear-gradient(
+      135deg,
+      oklch(1 0 0 / 0.22) 0%,
+      oklch(1 0 0 / 0.08) 12%,
+      oklch(1 0 0 / 0.04) 30%,
+      oklch(1 0 0 / 0.03) 50%,
+      oklch(1 0 0 / 0.04) 70%,
+      oklch(1 0 0 / 0.08) 88%,
+      oklch(1 0 0 / 0.18) 100%
+    ) border-box;
+}
+
+/* Light mode: dark reflection gradient (white-on-white is invisible) */
+:not(.dark) .island {
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.04);
+  background:
+    linear-gradient(var(--island-fill, var(--background)) 0 0) padding-box,
+    linear-gradient(
+      135deg,
+      oklch(0 0 0 / 0.14) 0%,
+      oklch(0 0 0 / 0.06) 12%,
+      oklch(0 0 0 / 0.04) 30%,
+      oklch(0 0 0 / 0.03) 50%,
+      oklch(0 0 0 / 0.04) 70%,
+      oklch(0 0 0 / 0.06) 88%,
+      oklch(0 0 0 / 0.12) 100%
+    ) border-box;
+}
+
+/* Space gradient tint overlay — applied to ALL islands via CSS custom prop
+   set by AppLayout's space-color useEffect. Transparent when no gradient. */
+.island::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: var(--island-overlay-bg, transparent);
+  pointer-events: none;
+  transition: background 300ms;
+}
+
+/* Subtle island border for small sidebar elements — uniform low-opacity edge */
+.glass-outline {
+  --island-fill: var(--sidebar-accent);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--island-fill) 0 0) padding-box,
+    linear-gradient(135deg, oklch(1 0 0 / 0.08), oklch(1 0 0 / 0.03) 50%, oklch(1 0 0 / 0.08)) border-box;
+}
+
+/* Light mode: dark outline gradient (mirrors .island light-mode fix) */
+:not(.dark) .glass-outline {
+  background:
+    linear-gradient(var(--island-fill) 0 0) padding-box,
+    linear-gradient(135deg, oklch(0 0 0 / 0.10), oklch(0 0 0 / 0.04) 50%, oklch(0 0 0 / 0.10)) border-box;
+}
+
+/* Keep text crisp in light mode: forced transform compositing can blur fonts.
+   Preserve the old GPU pre-promotion only in dark mode where it is less noticeable. */
+.island {
+  will-change: auto;
+}
+
+.dark .island {
+  will-change: transform;
+}
+
+.resize-col,
+.resize-row {
+  position: relative;
+}
+
+.resize-col::after {
+  content: "";
+  position: absolute;
+  inset: 0 -2px;
+}
+
+.resize-row::after {
+  content: "";
+  position: absolute;
+  inset: -2px 0;
+}
+
+/* ── Flat layout: edge-to-edge sections with simple 1px borders ── */
+.no-islands .island {
+  border-radius: 0;
+  border: none;
+  background: var(--island-fill, var(--background));
+  will-change: auto;
+}
+
+.no-islands .island::before {
+  display: none;
+}
+
+/* Column resize handles become full-height 1px borders */
+.no-islands .resize-col {
+  width: 1px;
+  background: var(--layout-divider);
+  position: relative;
+}
+/* Invisible hit area for drag usability (7px wide) */
+.no-islands .resize-col::after {
+  content: "";
+  position: absolute;
+  inset: 0 -3px;
+  z-index: 10;
+}
+.no-islands .resize-col > * {
+  display: none;
+}
+
+.no-islands .flat-divider-s {
+  border-inline-start: 1px solid var(--layout-divider);
+}
+
+.no-islands .tool-picker-shell {
+  position: relative;
+}
+
+.no-islands .tool-picker-shell::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 1px;
+  background: var(--layout-divider);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.no-islands .tool-picker {
+  position: relative;
+  z-index: 1;
+  padding-inline: 0;
+}
+
+.no-islands .tool-picker-btn {
+  margin-inline: auto;
+}
+
+/* Active tool picker button — subtle inner glow in dark mode */
+.dark .tool-picker-btn-active {
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%);
+}
+
+/* Row resize handles become full-width 1px borders */
+.no-islands .resize-row {
+  height: 1px;
+  background: var(--layout-divider);
+  position: relative;
+}
+.no-islands .resize-row::after {
+  content: "";
+  position: absolute;
+  inset: -3px 0;
+  z-index: 10;
+}
+.no-islands .resize-row > * {
+  display: none;
+}
+
+/* Flat mode: active chat header matches the taller settings/title bar height. */
+.no-islands .chat-header {
+  height: 3.25rem; /* 52px */
+}
+
+/* Flat mode: offset chat scrollbar so it starts below the header instead of disappearing behind it.
+   Radix scrollbar is position:absolute — override top + force bottom:0 so it stretches correctly. */
+.no-islands .chat-island [data-slot="scroll-area-scrollbar"][data-orientation="vertical"] {
+  top: 3.25rem !important; /* match .chat-header height */
+  bottom: 0 !important;
+  height: auto !important; /* override Tailwind h-full so top/bottom positioning works */
+}
+
+/* Title/drag bars: use opacity-aware fill in flat layout so they match the
+   active space opacity instead of staying fully opaque. */
+.chat-titlebar-bg {
+  background: var(--background);
+}
+
+.no-islands .chat-titlebar-bg {
+  background: var(--island-fill, var(--background));
+}
+
+/* Frameless window: draggable title bar regions */
+.drag-region {
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Windows: smaller corner radius to match native chrome, no traffic-light padding */
+html.platform-win32 {
+  --radius: 0.375rem;
+  --island-radius: 0.625rem;
+  --island-control-radius: 0.5625rem;
+}
+html.platform-win32 .drag-region {
+  -webkit-app-region: none;
+  padding-inline-start: 8px !important;
+}
+
+/* ── Text shimmer — pure CSS animation (no JS runtime overhead) ── */
+@keyframes shimmer {
+  from { background-position: 100% center; }
+  to { background-position: 0% center; }
+}
+
+.animate-shimmer {
+  animation: shimmer var(--shimmer-duration, 2s) linear infinite;
+}
+
+/* ── Search result highlight flash ── */
+@keyframes search-flash {
+  0% { background-color: oklch(0.8 0.15 85 / 0.3); }
+  100% { background-color: transparent; }
+}
+
+.search-highlight {
+  animation: search-flash 1.5s ease-out;
+  border-radius: var(--radius);
+}
+
+/* ── Voice dictation recording pulse ── */
+@keyframes recording-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.recording-pulse {
+  animation: recording-pulse 1.5s ease-in-out infinite;
+}
+
+/* Disable Tailwind Typography backtick pseudo-elements on code —
+   code blocks handle their own styling in React components */
+.prose :where(code)::before,
+.prose :where(code)::after {
+  content: none !important;
+}
+
+/* ── Space switch slide ── */
+@keyframes slide-from-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-from-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.space-slide-from-right {
+  animation: slide-from-right 0.2s ease-out;
+}
+.space-slide-from-left {
+  animation: slide-from-left 0.2s ease-out;
+}
+
+/* ── Tool group morph (newly finalized groups) ──
+   Simulates individual tool rows compressing into a single summary header. */
+.tool-group-morph-shell {
+  position: relative;
+  overflow: hidden;
+  will-change: height;
+  transition:
+    height var(--tool-group-morph-duration, 680ms) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tool-group-morph-header {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(14px) scale(0.965);
+  transform-origin: top left;
+  pointer-events: none;
+  will-change: opacity, transform;
+  transition:
+    opacity calc(var(--tool-group-morph-duration, 680ms) * 0.38) ease calc(var(--tool-group-morph-duration, 680ms) * 0.24),
+    transform var(--tool-group-morph-duration, 680ms) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tool-group-morph-header-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.tool-group-morph-tools {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  will-change: opacity;
+  transition: opacity calc(var(--tool-group-morph-duration, 680ms) * 0.72) ease;
+}
+
+.tool-group-morph-tools-out {
+  opacity: 0.2;
+}
+
+.tool-group-morph-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.tool-group-morph-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.25rem;
+  font-size: 13px;
+  transform-origin: 12px 50%;
+  will-change: transform, opacity;
+  transition:
+    transform var(--tool-group-morph-duration, 680ms) cubic-bezier(0.16, 1, 0.3, 1),
+    opacity calc(var(--tool-group-morph-duration, 680ms) * 0.55) ease;
+  transition-delay: calc(var(--tool-row-index, 0) * 32ms);
+}
+
+.tool-group-morph-row-out {
+  opacity: 0;
+  transform: translateY(calc(-12px - (var(--tool-row-index, 0) * 4px))) scale(0.96);
+}
+
+/* Slower collapse for tool groups so the "compress" feels deliberate.
+   Default animate-collapsible-up is ~200ms — too fast for grouping. */
+.tool-group-collapse {
+  --tw-animate-duration: 0.4s;
+  animation-duration: 0.4s !important;
+  animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0) !important;
+}
+
+/* ── Streaming text: per-chunk tail fade-in (applied via DOM wrapper spans) ── */
+@keyframes stream-chunk-enter {
+  from {
+    opacity: 0.15;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.stream-chunk-enter {
+  animation: stream-chunk-enter 0.32s ease-out both;
+}
+
+/* ── Global scrollbar styling — thin, themed, always subtly visible ──
+   Thumb stays at low opacity so scrollability is always apparent,
+   and brightens on direct hover for interaction feedback.
+   ScrollArea components override these with their own `display: none`. */
+:root {
+  --scrollbar-thumb: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
+}
+.dark {
+  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.25);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Terminal: hide xterm scrollbar by default, show on hover */
+.terminal-container .xterm-viewport::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.terminal-container:hover .xterm-viewport::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+}
+.terminal-container:hover .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+/* Defensive scrollbar hiding for overflow containers (InputBar toolbar fallback) */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Confluence content preview — balanced compact typography ── */
+.confluence-preview {
+  font-size: 12px;
+  line-height: 1.55;
+}
+.confluence-preview h1 { font-size: 16px; font-weight: 600; margin: 14px 0 6px; line-height: 1.3; }
+.confluence-preview h2 { font-size: 14px; font-weight: 600; margin: 12px 0 5px; line-height: 1.3; }
+.confluence-preview h3 { font-size: 13px; font-weight: 600; margin: 10px 0 4px; line-height: 1.3; }
+.confluence-preview h4,
+.confluence-preview h5,
+.confluence-preview h6 { font-size: 12px; font-weight: 600; margin: 8px 0 3px; line-height: 1.3; }
+.confluence-preview h1:first-child,
+.confluence-preview h2:first-child,
+.confluence-preview h3:first-child { margin-top: 0; }
+.confluence-preview p { margin: 4px 0; }
+.confluence-preview ul,
+.confluence-preview ol { margin: 4px 0; padding-inline-start: 20px; }
+.confluence-preview li { margin: 2px 0; }
+.confluence-preview hr { margin: 10px 0; border-color: rgba(255, 255, 255, 0.06); }
+.confluence-preview pre {
+  margin: 6px 0;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 11px;
+  line-height: 1.45;
+  overflow-x: auto;
+}
+.confluence-preview code { font-size: 11px; }
+.confluence-preview table { margin: 6px 0; font-size: 11px; border-collapse: collapse; width: 100%; }
+.confluence-preview th,
+.confluence-preview td { padding: 3px 8px; border: 1px solid rgba(255, 255, 255, 0.06); }
+.confluence-preview th { font-weight: 600; }
+.confluence-preview strong { font-weight: 600; }
+.confluence-preview blockquote { margin: 6px 0; padding-inline-start: 10px; border-inline-start: 2px solid rgba(255, 255, 255, 0.1); }

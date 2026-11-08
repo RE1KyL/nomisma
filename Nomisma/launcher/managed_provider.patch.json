@@ -1,0 +1,61 @@
+[
+  {
+    "id": "acp",
+    "config": {
+      "provider": "nomisma-managed",
+      "model": "configured"
+    }
+  },
+  {
+    "id": "credentials",
+    "disabled": true
+  },
+  {
+    "id": "nomisma-readonly-credentials",
+    "disabled": true
+  },
+  {
+    "id": "deepseek-account",
+    "disabled": true
+  },
+  {
+    "id": "llm-deepseek-account",
+    "disabled": true
+  },
+  {
+    "id": "session-title-llm",
+    "disabled": true
+  },
+  {
+    "id": "session-title-first-prompt-llm",
+    "disabled": true
+  },
+  {
+    "id": "session-title-all-prompts-llm",
+    "disabled": true
+  },
+  {
+    "id": "llm-deepseek",
+    "disabled": true
+  },
+  {
+    "id": "llm-pi-ai",
+    "disabled": true
+  },
+  {
+    "id": "authorization",
+    "disabled": true
+  },
+  {
+    "id": "session-title",
+    "disabled": true
+  },
+  {
+    "id": "session-log-deepseek",
+    "disabled": true
+  },
+  {
+    "id": "plugin-package-inventory-deepseek",
+    "disabled": true
+  }
+]
